@@ -23,4 +23,6 @@ qconf_mtrace="--enable-mtrace"
 qconf_targets="--target-list=arm-softmmu"
 qconf_opt="$conf_prefix $conf_trace $conf_fi $conf_mtrace $conf_targets"
 
-BBCONFIG="busybox-config"
+BBCONFIG="config-busybox"
+BBTAG="1_19_4"
+KCONFIG="config-$VERSION"
