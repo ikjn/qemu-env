@@ -26,3 +26,6 @@ qconf_opt="$conf_prefix $conf_trace $conf_fi $conf_mtrace $conf_targets"
 BBCONFIG="config-busybox"
 BBTAG="1_19_4"
 KCONFIG="config-$VERSION"
+KTAG=3.1.1
+QEMU_GIT="git@github.com:ikjn/qemu-fi-monitor.git"
+

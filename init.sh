@@ -2,29 +2,54 @@
 
 . ./version.sh
 
-./umnt.sh
+busybox() {
+	rm -rf ./busybox
+	git clone git://busybox.net/busybox.git ./busybox || exit 1
+	cd ./busybox
+	git checkout -b $BBTAG+ $BBTAG
+	cd ..
+}
 
-rm -rf output
-rm -rf mnt
+kernel() {
+	rm -rf linux-stable
+	git clone git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git || exit 1
+	cd linux-stable
+	git checkout -b $VERSION $KTAG || exit 1
+	cd ..
+}
 
-mkdir output
-mkdir output/boot
-mkdir output/rootfs
+init() {
+	rm -rf output
+	rm -rf mnt
 
-# 1. busybox
-# check config
-# copy source
-# build
+	mkdir output
+	mkdir output/boot
+	mkdir output/rootfs
+}
 
-# 2. kernel (config-omap3)
-# check config
-# source
-# objdir
+qemu() {
+	rm -rf qemu-linaro
+	git clone $QEMU_GIT
+	cd qemu-linaro
+}
 
-# 3. qemu-linaro
-# build
-# install
+case "$1" in
+  all)
+  	init
+	busybox
+	kernel
+	qemu
+	;;
+  busybox)
+    busybox
+	;;
+  kernel)
+    kernel
+	;;
+  qemu)
+    qemu
+	;;
+esac
 
-# 4. create sd card image
+exit 0
 
-# ...
