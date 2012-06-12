@@ -4,9 +4,10 @@
 
 CURDIR=`pwd`
 
-clean() {
+config() {
+	cp -f "$KCONFIG" $OBJDIR/.config || exit 1
 	cd "$LINUXDIR"
-	make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- O=${OBJDIR} clean || exit 1
+	make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- O=${OBJDIR} oldconfig || exit 1
 	cd "$CURDIR"
 }
 
@@ -32,8 +33,11 @@ if [ ! -d "$LINUXDIR" ] ; then
 fi
 
 case "$1" in
+  config)
+    config
+	;;
   all)
-    clean
+    config
 	uimage
 	modules
 	;;

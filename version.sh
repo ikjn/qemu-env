@@ -12,7 +12,7 @@ IMG=test.img
 OFFSET_BOOT=32256
 OFFSET_ROOT=54525952
 
-KCONFIG="config-omap3"
+KCONFIG="config-$VERSION"
 
 QOBJDIR=`pwd`/qemu-obj
 
@@ -21,7 +21,7 @@ qconf_prefix="--prefix=/home/coolbox/usr/qemu-linaro"
 qconf_fi="--enable-fault-injection"
 qconf_mtrace="--enable-mtrace"
 qconf_targets="--target-list=arm-softmmu"
-qconf_opt="$conf_prefix $conf_trace $conf_fi $conf_mtrace $conf_targets"
+qconf_opt="${qconf_prefix} ${qconf_trace} ${qconf_fi} ${qconf_mtrace} ${qconf_targets}"
 
 BBCONFIG="config-busybox"
 BBTAG="1_19_4"

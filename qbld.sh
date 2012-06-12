@@ -9,7 +9,9 @@ configure() {
 		mkdir $QOBJDIR
 	fi
 	cd $QOBJDIR
-	../qemu-linaro/configure $conf_opt
+	echo "configure $qconf_opt"
+	make distclean 2>/dev/null
+	../qemu-linaro/configure ${qconf_opt} || exit 1
 	cd $CURDIR
 }
 
